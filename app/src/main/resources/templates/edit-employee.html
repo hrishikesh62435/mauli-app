@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Mauli Multiatate Co-op Credit Society Ltd. Nashik | Edit Employee </title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon"  th:href="@{/dist/img/favicon.ico}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" th:href="@{/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css}">
+    <!-- Select2 -->
+  <link rel="stylesheet" th:href="@{/plugins/select2/css/select2.min.css}">
+  <link rel="stylesheet" th:href="@{/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css}">
+    <!-- Toastr --> 
+  <link rel="stylesheet" th:href="@{/plugins/toastr/toastr.min.css}">
+  <!-- iCheck -->
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" th:href="@{/plugins/icheck-bootstrap/icheck-bootstrap.min.css}">
+  <!-- JQVMap -->
+  <link rel="stylesheet" th:href="@{/plugins/jqvmap/jqvmap.min.css}">
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
+    <!-- daterange picker -->
+  <link rel="stylesheet" th:href="@{/plugins/daterangepicker/daterangepicker.css}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" th:href="@{/plugins/overlayScrollbars/css/OverlayScrollbars.min.css}">
+  <!-- summernote -->
+  <link rel="stylesheet" th:href="@{/plugins/summernote/summernote-bs4.css}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav th:replace="header"></nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside th:replace="sidebar::sidebar(${menu},${user})"></aside>
+  <!-- /.Main Sidebar Container -->
+
+ <!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0 text-dark">Edit Employee</h1>
+						</div>
+						<div class="col-sm-6">
+				            <ol class="breadcrumb float-sm-right">
+				              <li class="breadcrumb-item"><a href="#">Employee</a></li>
+				              <li class="breadcrumb-item active">Edit Employee</li>
+				            </ol>
+				        </div><!-- /.col -->
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+    		<!-- Main content -->
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<!-- left column -->
+						<div class="col-md-12">
+							<!-- general form elements -->
+							<div class="card card-outline card-primary">
+								<!-- <div class="card-header">
+									<h3 class="card-title">Add Form</h3>
+								</div> -->
+								<!-- /.card-header -->
+								<!-- form start -->
+								<form role="form" class="form-horizontal" th:action="@{/update-employee}" method="post" >
+									
+									<input type="hidden" name="employeeId" id="employeeId" th:value="${employee.employeeId}"> 
+									<input type="hidden" name="employeeCode" th:value="${employee.employeeCode}"> 
+									<input type="hidden" id="employeePhoto" name="employeePhoto"  th:value="${employee.employeePhoto}" />												
+									<div class="card-body">
+										
+										<div class="form-group row">
+											<div class='col-sm-2'>
+												<label for="employeeName">Employee Name</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" class="form-control" id="employeeName" name="employeeName" th:value="${employee.employeeName}" required="required">													
+											</div>	
+											
+											<div class='col-sm-2'>
+												<label for="contactNumber">Contact Number</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" class="form-control" id="contactNumber" name="contactNumber" th:value="${employee.contactNumber}" required="required">													
+											</div>										
+										</div>
+										
+										<div class="form-group row">
+											<div class='col-sm-2'>
+												<label for="employeeAddress">Employee Address</label>
+											</div>
+											<div class="col-sm-3">
+												<textarea class="form-control" id="employeeAddress" name="employeeAddress" th:text="${employee.employeeAddress}" required="required"></textarea>												
+											</div>	
+											
+											<div class='col-sm-2'>
+												<label for="dob">Birth Date</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" class="form-control" id="dob" name="dob" data-inputmask-alias="datetime" th:value="${employee.dob}" data-inputmask-inputformat="dd/mm/yyyy" data-mask >						
+											</div>												
+										</div>
+										
+										<div class="form-group row">
+											<div class='col-sm-2'>
+												<label for="dateOfJoining">Date Of Joining</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" class="form-control" id="dateOfJoining" name="dateOfJoining" th:value="${employee.dateOfJoining}" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask required="required">																		
+											</div>											
+										
+											<div class='col-sm-2'>
+												<label for="resignationDate">Resignation Date</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" class="form-control" id="resignationDate" name="resignationDate" th:value="${employee.resignationDate}" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask >						
+											</div>											
+										</div>
+										
+										<div class="form-group row">
+											<div class='col-sm-2'>
+												<label for="employeePost">Employee Post</label>
+											</div>
+											<div class="col-sm-3">
+											   <!--  <select ></select> -->
+												<input type="text" class="form-control" id="employeePost" name="employeePost" th:value="${employee.employeePost}"  required="required">													
+											</div>											
+										
+											<div class='col-sm-2'>
+												<label for="salary">Salary</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" class="form-control" id="salary" name="salary"  th:value="${employee.salary}" required="required">													
+											</div>											
+										</div>
+										
+										<div class="form-group row">
+											<div class='col-sm-2'>
+												<label for="employeeBranch">Branch</label>
+											</div>
+											<div class="col-sm-3">
+											    <select class="form-control select2" id="employeeBranch" name="employeeBranch"  data-placeholder="Select Branch" required="required">
+											    	<option></option> 
+											    	<option th:each="branch:${branches}" th:value="${branch.branchName}" th:text="${branch.branchName}" th:selected="${branch.branchName == employee.employeeBranch}"></option>
+											    	
+											    </select>																								
+											</div>											
+										</div>
+										
+										<div class="form-group row">
+											<div class='col-sm-2'>
+												<label for="pancard">PAN Card</label>
+											</div>
+											<div class="col-sm-3">
+											   <!--  <select ></select> -->
+												<input type="text" class="form-control" id="pancard" name="pancard" th:value="${employee.pancard}"  required="required">													
+											</div>											
+										
+											<div class='col-sm-2'>
+												<label for="aadharcard">Aadhar Card</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" class="form-control" id="aadharcard" name="aadharcard" th:value="${employee.aadharcard}" required="required">													
+											</div>											
+										</div>
+										
+										<div class="form-group row">
+											<div class='col-sm-2'>
+												<label for="documentType">Other ID Proof</label>
+											</div>
+											<div class="col-sm-3">
+											   <select class="form-control select2" id="documentType" name="documentType"  data-placeholder="Select Document">
+											    	<option></option> 
+											    	<option value="Driving Licence" th:selected="${employee.documentType == 'Driving Licence'}">Driving Licence</option>
+											    	<option value="Passport" th:selected="${employee.documentType == 'Passport'}">Passport</option>
+											    	<option value="Voter ID Card" th:selected="${employee.documentType == 'Voter ID Card'}">Voter ID Card</option>
+											    	<option value="Ration Card" th:selected="${employee.documentType == 'Ration Card'}">Ration Card</option>
+											    </select>													
+											</div>											
+										
+											<div class='col-sm-2'>
+												<label for="documentNumber">Document Number</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" class="form-control" id="documentNumber" name="documentNumber" th:value="${employee.documentNumber}">													
+											</div>											
+										</div>
+										
+										<br><hr><br>
+										
+										<div class="form-group row">
+											<div class='col-sm-2'>
+												<label for="contactPersonName">Contact Person Name</label>
+											</div>
+											<div class="col-sm-3">
+											   <!--  <select ></select> -->
+												<input type="text" class="form-control" id="contactPersonName" name="contactPersonName" th:value="${employee.contactPersonName}" required="required">													
+											</div>	
+											
+											<div class='col-sm-2'>
+												<label for="relation">Relation</label>
+											</div>
+											<div class="col-sm-3">
+											   <!--  <select ></select> -->
+												<input type="text" class="form-control" id="relation" name="relation" th:value="${employee.relation}" required="required">													
+											</div>											
+																
+										</div>
+										
+										<div class="form-group row">
+											
+											<div class='col-sm-2'>
+												<label for="personContactNumber">Contact Number</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" class="form-control" id="personContactNumber" name="personContactNumber" th:value="${employee.personContactNumber}" required="required">													
+											</div>	
+											
+											 <div class='col-sm-2'>
+												<label for="personAddress">Address</label>
+											</div>
+											<div class="col-sm-3">
+												<textarea class="form-control" id="personAddress" name="personAddress" required="required" th:text="${employee.personAddress}"></textarea>												
+											</div>											
+										</div>
+										
+										<br><hr><br>
+										
+										<div class="form-group row">
+											<div class='col-sm-2'>
+												<label for="remark">Remark</label>
+											</div>
+											<div class="col-sm-3">
+												<textarea class="form-control" id="remark" name="remark" required="required" th:text="${employee.remark}"></textarea>												
+											</div>								
+										</div>
+																			
+									</div>
+									
+									<!-- /.card-body -->
+									<div class="card-footer row">
+									      <div class="col-sm-2" ></div>
+									   		<button type="submit" id="btnSubmit" class="btn btn-primary  col-md-offset-2" >Update</button>
+									</div>
+								</form>
+							</div>
+							<!-- /.card -->
+						</div>
+						<!--/.col (left) -->
+					</div>
+					<!-- /.row -->
+					<div class="card ">            
+              <div class="card-header">
+                <h3 class="card-title">Change Employee Photo</h3>
+              </div>
+               
+              <div class="card-body"> 
+	            <div class="row">	             
+	             <div class="col-md-6">	                 
+	                  <div class="col-12 text-center">
+					      <img th:src="@{${filePath}+${employee.employeePhoto}}" height="128px" width="128px" alt="Employee Photo" id="profile-picture" class="img-circle img-fluid">
+					  </div>
+                 </div>	             
+	            </div>
+	            </div>
+	            
+	            <div class="card-footer">
+	            <div class="row">	             
+	               <div class="col-md-12">		
+	                  <div class="custom-file col-md-6 ">
+                        <input type="file" class="custom-file-input" id="profilePicInputFile" accept="image/*" >
+                        <label class="custom-file-label" for="profilePicInputFile">Choose file</label>
+                      </div>
+                  </div>	             
+	            </div>
+               </div>
+            </div>
+					
+					
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+			<!-- /.content -->
+		</div>
+  <!-- /.content-wrapper -->
+ 
+  <footer  th:replace="footer"></footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script th:src="@{/plugins/jquery-ui/jquery-ui.min.js}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+
+<!-- Tempusdominus Bootstrap 4 -->
+<script  th:src="@{/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js}"></script>
+<!-- Summernote -->
+<script  th:src="@{/plugins/summernote/summernote-bs4.min.js}"></script>
+<!-- Select2 -->
+<script th:src="@{/plugins/select2/js/select2.full.min.js}"></script>
+<!-- Toastr -->
+<script th:src="@{/plugins/toastr/toastr.min.js}"></script>
+<!-- bs-custom-file-input -->
+<script th:src="@{/plugins/bs-custom-file-input/bs-custom-file-input.min.js}"></script>
+<!-- overlayScrollbars -->
+<script  th:src="@{/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js}"></script>
+<!-- InputMask -->
+<script th:src="@{/plugins/moment/moment.min.js}"></script>
+<script th:src="@{/plugins/inputmask/min/jquery.inputmask.bundle.min.js}"></script>
+<!-- date-range-picker -->
+<script th:src="@{/plugins/daterangepicker/daterangepicker.js}"></script>
+<!-- AdminLTE App -->
+<script  th:src="@{/dist/js/adminlte.js}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script  th:src="@{/dist/js/pages/dashboard.js}"></script>
+<!-- jquery-validation -->
+<script th:src="@{/plugins/jquery-validation/jquery.validate.min.js}"></script>
+<script th:src="@{/plugins/jquery-validation/additional-methods.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script  th:src="@{/dist/js/demo.js}"></script>
+<script type="text/javascript">
+
+	$(function () {	
+		
+		bsCustomFileInput.init();
+		 //Initialize Select2 Elements
+	    $('.select2').select2();
+	
+		$('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
+		$('[data-mask]').inputmask();
+				  
+		/* $('#contactNumber, #personContactNumber').on('keypress', function(e) {
+
+            var $this = $(this);
+            var regex = new RegExp("^[0-9\b]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            // for 10 digit number only
+            if ($this.val().length > 9) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.charCode < 54 && e.charCode > 47) {
+                if ($this.val().length == 0) {
+                    e.preventDefault();
+                    return false;
+                } else {
+                    return true;
+                }
+
+            }
+            if (regex.test(str)) {
+                return true;
+            }
+            e.preventDefault();
+            return false;
+        }); */
+		
+		$('#profilePicInputFile').change(function(e){   	  
+			 
+		     // getting a hold of the file reference
+		     var file = e.target.files[0]; 
+		     
+		     const  fileType = file['type'];
+		      const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+		      if (!validImageTypes.includes(fileType)) {
+		    	 toastr.error("Invalid file format.");
+		    	 return false;
+		      } 
+		     // setting up the reader
+		     var reader = new FileReader();
+		     reader.readAsDataURL(file); // this is reading as data url
+	              	
+		     var content; 
+		     // here we tell the reader what to do when it's done reading...
+		     reader.onload = readerEvent => {
+		    	content = readerEvent.target.result; // this is the content!    	        
+		        document.getElementById('profile-picture').setAttribute( 'src', content);
+		        //document.getElementById('sidebar-profile-picture').setAttribute( 'src', content);    	        
+		    }
+		     
+		    e.preventDefault();
+		    
+		    var fileName = file.name;
+		    
+		    var myFormData = new FormData();
+		    myFormData.append('employeeId', $('#employeeId').val());
+		    myFormData.append('file', file, fileName);
+		    
+		    		  
+		     $.ajax({
+				  url: '/uploadDashboardProfilePicture',
+				  type: 'POST',
+			      processData: false, // important
+			      contentType: false, // important
+			      dataType : 'json',
+			      data: myFormData, 
+				  success: function(data) {
+					 
+				  },
+				  error: function(e) {
+					//called when there is an error
+					//console.log(e.message);
+				  }
+				})
+				
+				 toastr.success("Profile picture changed.");	
+	    }); 
+	});
+</script>
+</body>
+</html>

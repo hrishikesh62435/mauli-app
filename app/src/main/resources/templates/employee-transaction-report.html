@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Mauli Multiatate Co-op Credit Society Ltd. Nashik | Transaction Report</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon"  th:href="@{/dist/img/favicon.ico}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" th:href="@{/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css}">
+    <!-- Select2 -->
+  <link rel="stylesheet" th:href="@{/plugins/select2/css/select2.min.css}">
+  <link rel="stylesheet" th:href="@{/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css}">
+  <!-- iCheck -->
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" th:href="@{/plugins/icheck-bootstrap/icheck-bootstrap.min.css}">
+  <!-- JQVMap -->
+  <link rel="stylesheet" th:href="@{/plugins/jqvmap/jqvmap.min.css}">
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
+    <!-- daterange picker -->
+  <link rel="stylesheet" th:href="@{/plugins/daterangepicker/daterangepicker.css}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" th:href="@{/plugins/overlayScrollbars/css/OverlayScrollbars.min.css}">
+  <!-- summernote -->
+  <link rel="stylesheet" th:href="@{/plugins/summernote/summernote-bs4.css}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav th:replace="header"></nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside th:replace="sidebar::sidebar(${menu},${user})"></aside>
+  <!-- /.Main Sidebar Container -->
+
+ <!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0 text-dark">Employee Wise Transaction Report <small><a href="#" id="printBtn" class="btn btn-default"><i class="fas fa-print"></i> Print</a></small></h1>
+						</div>
+						<!--<div class="col-sm-6">
+				            <ol class="breadcrumb float-sm-right">
+				              <li class="breadcrumb-item"><a href="#">Transaction</a></li>
+				              <li class="breadcrumb-item active">Transaction Report</li>
+				            </ol>
+				        </div> /.col -->
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+    		<!-- Main content -->
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row no-print">
+						<!-- left column -->
+						<div class="col-md-12">
+							<!-- general form elements -->
+							<div class="card card-outline card-primary">
+								<!-- <div class="card-header">
+									<h3 class="card-title">Add Form</h3>
+								</div> -->
+								<!-- /.card-header -->
+								<!-- form start -->
+								<form role="form" class="form-horizontal" action="employee-transaction-report" method="get" >									
+									<!-- <input type="hidden" name="isactive" value="1"> -->
+									<div class="card-body">
+																				
+										<div class="form-group row">	
+										
+											<div class="col-sm-2">
+											    <select class="form-control select2" id="reportId" name="reportId"  data-placeholder="Select Report" required="required">
+											      <option></option> 
+											      <option value="Annual">Annual</option> 
+											      <option value="Half Yearly">Half Yearly</option> 
+											      <option value="Quarterly">Quarterly</option> 
+											      <option value="Monthly">Monthly</option> 											      
+											    </select>																								
+											</div>	
+																				
+											<div class="col-sm-2">
+											    <select class="form-control select2" id="employeeBranch" name="employeeBranch"  data-placeholder="Select Branch" required="required">
+											    	<option></option> 
+											    	<option th:each="branch:${branches}" th:value="${branch.branchName}" th:text="${branch.branchName}"></option>
+											    </select>																								
+											</div>	
+																						
+											<div class="col-sm-3">
+											    <select class="form-control select2" id="employeeId" name="employeeId"  data-placeholder="Select Employee" required="required">
+											    </select>																								
+											</div>	
+											
+											<div class="col-sm-2"  style="display: none;" id="annualDiv">
+											    <select class="form-control select2" id="annual" name="annual"  data-placeholder="Select Financial Year"  >
+											    	<option></option> 
+											    	<option value="2021-2022">2021-2022</option>
+											    	<option value="2022-2023">2022-2023</option>
+											    	<option value="2023-2024">2023-2024</option>
+											    	<option value="2024-2025">2024-2025</option>
+											    	<option value="2025-2026">2025-2026</option>
+											    </select>																								
+											</div>	
+											
+											<div class="col-sm-2"  style="display: none;" id="halfYearlyDiv">
+											    <select class="form-control select2" id="halfYearly" name="halfYearly"  data-placeholder="Select Period"  >
+											    	<option></option> 
+											    	<option value="First Half-Year">First Half-Year</option>
+											    	<option value="Second Half-Year">Second Half-Year</option>
+											    </select>																								
+											</div>
+											
+											<div class="col-sm-2"  style="display: none;" id="quarterlyDiv">
+											    <select class="form-control select2" id="quarterly" name="quarterly"  data-placeholder="Select Period"  >
+											    	<option></option> 
+											    	<option value="Quarter-1">Quarter-1</option>
+											    	<option value="Quarter-2">Quarter-2</option>
+											    	<option value="Quarter-3">Quarter-3</option>
+											    	<option value="Quarter-4">Quarter-4</option>
+											    </select>																								
+											</div>
+											
+											<div class="col-sm-2"  style="display: none;" id="monthDiv">
+											    <select class="form-control select2" id="month" name="month"  data-placeholder="Select Month"  >
+											    	<option></option> 
+											    	<option th:each="month:${months}" th:value="${month.key}" th:text="${month.value}" ></option>
+											    </select>																								
+											</div>	
+											
+											<div class="col-sm-2"  style="display: none;" id="yearDiv">
+											    <select class="form-control select2" id="year" name="year"  data-placeholder="Select Year" >
+											    	<option></option> 
+											    	<option th:each="year:${years}" th:value="${year}" th:text="${year}"></option>
+											    </select>																								
+											</div>
+											
+											<div class="col-sm-1">
+											    <button type="submit" id="btnSubmit" class="btn btn-primary  col-md-offset-2" >Submit</button>																							
+											</div>											
+										</div>
+																			
+									</div>									
+								</form>
+							</div>
+							<!-- /.card -->
+						</div>
+						<!--/.col (left) -->
+					</div>
+					<!-- /.row -->
+				   <div class="row" id="printLogo" style="display: none;">
+	         			<div class="col-md-12">
+	         					 <p class="text-center"> <a href="#"><img alt="Maulee Multistate Logo" th:src="@{/dist/img/maulee_crop-removebg.png}"  th:width="250px"></a> </p>
+	         			</div>
+	         			<br>
+      			   </div>
+				   
+				   
+						<div class="row" th:if="${reportType != null}">
+						<div class="col-12">
+							<div class="card card-outline card-primary">
+								 <div class="card-header">
+									<h3 class="card-title" th:text="'Employee Wise Transaction '+${reportType}+ ' Report - '+${period} " ></h3>
+								</div> 
+								<!-- /.card-header -->								
+								<div class="card-body table-responsive p-0">
+									<table class="table table-bordered table-striped" th:if="${#lists.isEmpty(transList)}">
+											<tr>
+												<td style="text-align: center;" colspan="5">Record not found.</td>
+											</tr>
+									</table>
+									<table id="tbl1" class="table table-bordered table-striped" th:unless="${#lists.isEmpty(transList)}">
+										<thead>
+										    <tr>	
+											    <th>Sr No</th>	
+											    <th>Employee Name</th>	
+											    <th>Branch Name</th>										
+												<th>Period</th>	
+												<th>Amount</th>	
+											</tr>											
+										</thead>
+										<tbody>
+											<tr th:each="trans, loop :${transList}" >
+												<td th:text="${loop.count}"></td>
+												<td th:text="${trans.employeeName}"></td>
+												<td th:text="${trans.employeeBranch}"></td>
+												<td th:text="${trans.month}+'-'+${trans.year}"></td>
+												<td th:text="${#numbers.formatDecimal(trans.businessAmount, 0, 'NONE', 2, 'POINT')}" class="sum"  style="text-align: right"></td>												
+											</tr>
+											<tr>
+												<td style="text-align: right" colspan="4">Total</td>
+												<td style="text-align: right" id="total"></td>
+											</tr>
+										</tbody>
+									</table>
+									
+								</div>
+								<!-- /.card-body -->
+							</div>
+							<!-- /.card -->
+						</div>
+						<!-- /.col -->
+					</div>
+				
+				
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+			<!-- /.content -->
+		</div>
+  <!-- /.content-wrapper -->
+ 
+  <footer  th:replace="footer"></footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script th:src="@{/plugins/jquery-ui/jquery-ui.min.js}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+
+<!-- Tempusdominus Bootstrap 4 -->
+<script  th:src="@{/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js}"></script>
+<!-- Summernote -->
+<script  th:src="@{/plugins/summernote/summernote-bs4.min.js}"></script>
+<!-- Select2 -->
+<script th:src="@{/plugins/select2/js/select2.full.min.js}"></script>
+<!-- overlayScrollbars -->
+<script  th:src="@{/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js}"></script>
+<!-- InputMask -->
+<script th:src="@{/plugins/moment/moment.min.js}"></script>
+<script th:src="@{/plugins/inputmask/min/jquery.inputmask.bundle.min.js}"></script>
+<!-- date-range-picker -->
+<script th:src="@{/plugins/daterangepicker/daterangepicker.js}"></script>
+<!-- AdminLTE App -->
+<script  th:src="@{/dist/js/adminlte.js}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script  th:src="@{/dist/js/pages/dashboard.js}"></script>
+<!-- jquery-validation -->
+<script th:src="@{/plugins/jquery-validation/jquery.validate.min.js}"></script>
+<script th:src="@{/plugins/jquery-validation/additional-methods.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script  th:src="@{/dist/js/demo.js}"></script>
+<script type="text/javascript">
+
+$(document).ready(
+	    function(){	
+		
+		 //Initialize Select2 Elements
+	    $('.select2').select2();
+		
+	    $('#reportId').change( function() {
+	    	var report = $('#reportId').val();
+	    	if(report == 'Monthly'){
+	    		$('#monthDiv').css({'display':'block'});  
+	    	    $('#yearDiv').css({'display':'block'});  
+	    	    $('#month').attr({'required':'required'});  
+	    	    $('#year').attr({'required':'required'}); 
+	    	    
+	    	    $('#annualDiv').css({'display':'none'}); 
+	    	    $('#halfYearlyDiv').css({'display':'none'}); 
+	    	    $('#halfYearly').attr({'required':false});
+	    	    $('#quarterlyDiv').css({'display':'none'});  
+	    	    $('#quarterly').attr({'required':false}); 
+	    	
+	    	} else if(report == 'Annual'){
+	    	    $('#annualDiv').css({'display':'block'});  
+	    	    $('#annual').attr({'required':'required'}); 
+	    	    
+	    	    $('#monthDiv').css({'display':'none'});  
+	    	    $('#yearDiv').css({'display':'none'});  
+	    	    $('#month').prop('required',false); 
+	    	    $('#year').prop('required',false); 
+	    	    $('#halfYearlyDiv').css({'display':'none'});  
+	    	    $('#halfYearly').attr({'required':false});
+	    	    $('#quarterlyDiv').css({'display':'none'});  
+	    	    $('#quarterly').attr({'required':false}); 
+	    	    
+	   		} else if(report == 'Half Yearly'){
+	   			
+	   			$('#monthDiv').css({'display':'none'});  
+	    	    $('#yearDiv').css({'display':'none'});  
+	    	    $('#month').prop('required',false); 
+	    	    $('#year').prop('required',false); 
+	   		    $('#annualDiv').css({'display':'block'});  
+	    	    $('#annual').attr({'required':'required'}); 
+	    	    $('#halfYearlyDiv').css({'display':'block'});  
+	    	    $('#halfYearly').attr({'required':'required'});
+	    	    $('#quarterlyDiv').css({'display':'none'});  
+	    	    $('#quarterly').attr({'required':false}); 
+	    	  
+	   		} else if(report == 'Quarterly') {
+	   			
+	   		    $('#quarterlyDiv').css({'display':'block'});  
+	    	    $('#quarterly').attr({'required':'required'}); 
+	    	    
+	    	    $('#monthDiv').css({'display':'none'});  
+	    	    $('#yearDiv').css({'display':'none'});  
+	    	    $('#month').prop('required',false); 
+	    	    $('#year').prop('required',false); 
+	   		    $('#annualDiv').css({'display':'block'});  
+	    	    $('#annual').attr({'required':'required'}); 
+	    	    $('#halfYearlyDiv').css({'display':'none'});  
+	    	    $('#halfYearly').attr({'required':false});
+	   		}
+	    		    	
+	    });
+	
+	    $('#employeeBranch').change( function() {
+			 
+			  var branch= $(this).val();	    	
+			  $.ajax({
+				  url:  '/getEmployeesByBranch',
+				  type: 'GET',
+				  dataType : 'json',
+		          async : false,				  
+				  data: {"employeeBranch":branch},
+				  success: function(data) {
+					  $('#employeeId').html('');
+					  var optionval = "<option></option>";
+					  for (var i = 0; i < data.length; i++) {
+						 
+						  optionval=optionval+"<option value='"+data[i].employeeId+"'>"+data[i].employeeName+"</option>"				  
+					  }
+					  
+					  $('#employeeId').html(optionval);					  
+				  },
+				  error: function(e) {
+					//called when there is an error
+					//console.log(e.message);
+				  }
+				});			  
+	    });
+	    
+	    var tot = 0;
+	    $('.sum').each(function(){	    	
+	    	  var textVal = $(this).text(); 	    	 
+	    	  tot = parseFloat(tot)+parseFloat(textVal);  
+	    	  $('#total').html(parseFloat(tot).toFixed(2));
+	    }); 
+	    
+	    $('#printBtn').click( function() {    	
+			
+			 $('#printLogo').css("display","block");
+			 
+			 window.print();
+			 
+			 $('#printLogo').css("display","none");		 
+		 });
+	});
+</script>
+</body>
+</html>
